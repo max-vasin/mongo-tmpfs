@@ -1,24 +1,27 @@
 # mongo-tmpfs
-[mongo-tmpfs](https://hub.docker.com/r/jamesridgway/mongo-tmpfs) is a docker container for running a mongo instance against a tmpfs storage volume.
-
-This container is designed to enhance performance in testing environments. Logging and preallocation is disabled and smallfiles are enabled.
 
 The `TMPFS_SIZE` environment variable can be used to configure the size (in MB) of the tmpfs volume.
 
+Build image
+
 ```
-docker run  --name mongo-tmpfs \
+docker build -t mongo-ram:5 .
+``` 
+
+Run container
+
+```
+docker run  --name mongo-ram \
             --privileged \
             -p 27017:27017 \
-            jamesridgway/mongo-tmpfs:4.0
+            mongo-ram:5
 ```
 
-## MongoDB Version
-Different version of the mongo-tmpfs container are available for different versions.
+Run cluster
 
-| Mongo Version  | Docker Tag                   |
-| -------------- | ---------------------------- |
-| 3.0            | jamesridgway/mongo-tmpfs:3.0 |
-| 3.2            | jamesridgway/mongo-tmpfs:3.2 |
-| 3.4            | jamesridgway/mongo-tmpfs:3.4 |
-| 3.6            | jamesridgway/mongo-tmpfs:3.6 |
-| 4.0            | jamesridgway/mongo-tmpfs:4.0 |
+```
+docker exec -it mongo-ram mongo
+```
+Inside container type
+
+rs.initiate()
