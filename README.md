@@ -24,4 +24,6 @@ docker exec -it mongo-ram mongo
 ```
 Inside container type
 
+```
 rs.initiate()
+```
